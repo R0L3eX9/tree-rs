@@ -36,10 +36,10 @@ fn walk(root: PathBuf, max_depth: usize, depth: usize, prefix: String) -> Result
         if path.is_dir() {
             dirs += 1;
 
-            let new_pref = if depth > 0 || idx == paths.len() - 1 {
+            let new_pref = if idx == paths.len() - 1 {
                 format!("{}    ", prefix)
             } else {
-                format!("│   ")
+                format!("{}│   ", prefix)
             };
 
             if depth + 1 < max_depth {
