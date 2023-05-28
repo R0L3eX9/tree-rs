@@ -12,7 +12,7 @@ Unlike the original implementation the printed colors are hard coded.
 "-L" - specifies the depth to explore
 
 ## To do
-* [ ] Parse depth level via CLI
-* [ ] Parse directory to explore via CLI
+* [x] Parse depth level via CLI
+* [x] Parse directory to explore via CLI
 * [ ] Print executables in green
 

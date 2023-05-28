@@ -54,11 +54,12 @@ fn walk(root: PathBuf, max_depth: usize, depth: usize, prefix: String) -> Result
     Ok((dirs, files))
 }
 
-pub fn explore(root: PathBuf, max_depth: usize) -> Tree {
-    let tree = walk(root, max_depth, 0, format!(""))
-        .expect("Something went wrong exploring the tree");
-    return Tree {
-        directories: tree.0,
-        files: tree.1,
-    };
+pub fn explore(root: PathBuf, max_depth: usize) -> Result<Tree> {
+    match walk(root, max_depth, 0, format!("")) {
+        Ok(tree) => Ok(Tree {
+            directories: tree.0,
+            files: tree.1,
+        }),
+        Err(err) => Err(err),
+    }
 }
