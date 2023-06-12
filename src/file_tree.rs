@@ -1,5 +1,6 @@
 use std::fs;
 use std::io::Result;
+use std::os::unix::prelude::MetadataExt;
 use std::path::PathBuf;
 
 pub struct Tree {
@@ -30,7 +31,13 @@ fn walk(root: PathBuf, max_depth: usize, depth: usize, prefix: String) -> Result
         tree_name = if path.is_dir() == true {
             format!("{}\x1b[94m{}\x1b[0m", tree_name, name)
         } else {
-            format!("{}{}", tree_name, name)
+            let mode = path.metadata().unwrap().mode();
+            let executable = mode & 0o111;
+            if executable != 0 {
+                format!("{}\x1b[92m{}\x1b[0m", tree_name, name)
+            } else {
+                format!("{}{}", tree_name, name)
+            }
         };
         println!("{}", tree_name);
         if path.is_dir() {
