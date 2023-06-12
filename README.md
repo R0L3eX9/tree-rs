@@ -14,5 +14,5 @@ Unlike the original implementation the printed colors are hard coded.
 ## To do
 * [x] Parse depth level via CLI
 * [x] Parse directory to explore via CLI
-* [ ] Print executables in green
+* [x] Print executables in green
 
